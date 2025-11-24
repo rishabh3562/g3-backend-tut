@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const userSchema = mongoose.Schema({
     name: String,
     age: Number,
@@ -8,6 +9,10 @@ const userSchema = mongoose.Schema({
         type: String,
         enum: ['admin', 'user', 'editor']
     }
+
+})
+
+userSchema.pre('save', function (next) {
 
 })
 console.log("schema")
