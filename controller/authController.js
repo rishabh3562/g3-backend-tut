@@ -3,21 +3,28 @@ const loginHandler = (req, res) => {
 
 }
 const registerHandler = async (req, res) => {
-    const { name, age, email, password, role } = req.body;
+    try {
+        const { name, age, email, password, role } = req.body;
 
-    const data = new User({
-        name: name,
-        age: age,
-        email: email,
-        password: password, 
-        role: role
-    })
+        const data = new User({
+            name: name,
+            age: age,
+            email: email,
+            password: password,
+            role: role
+        })
 
-    const savedUser = await data.save();
-    res.json({
-        success: true,
-        data: savedUser
-    })
+        const savedUser = await data.save();
+        res.json({
+            success: true,
+            data: savedUser
+        })
+    } catch (err) {
+        res.json({
+            success: false,
+            error: err.message
+        })
+    }
 }
 const getme = (req, res) => {
 
