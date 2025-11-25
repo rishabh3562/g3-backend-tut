@@ -1,6 +1,24 @@
 const User = require('../models/userModel')
-const loginHandler = (req, res) => {
+const loginHandler = async (req, res) => {
+    const { email, password } = req.body;
+    // check missing fields
+    if (!email || !password) {
+        return res.json({
+            success: false,
+            message: "missing fields"
+        })
+    }
+    // check if user exists or not
+    let user = await User.findOne({ email });
+    if (!user) {
+        return res.json({
+            success: false,
+            message: "user does not exist"
+        })
+    }
 
+    //compare passwords 
+    
 }
 const registerHandler = async (req, res) => {
     try {
