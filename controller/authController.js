@@ -18,7 +18,14 @@ const loginHandler = async (req, res) => {
     }
 
     //compare passwords 
-    
+    let isMatch = await user.comparePasswords(password);
+
+    if (!isMatch) {
+        return res.json({
+            success: false,
+            message: "invalid credentials"
+        })
+    }
 }
 const registerHandler = async (req, res) => {
     try {
