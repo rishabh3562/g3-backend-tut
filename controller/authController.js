@@ -1,3 +1,4 @@
+const { generateToken } = require('../middleware/auth');
 const User = require('../models/userModel')
 const loginHandler = async (req, res) => {
     const { email, password } = req.body;
@@ -28,8 +29,24 @@ const loginHandler = async (req, res) => {
     }
 
     //jwt issue
-
+    let payload = {
+        _id: user._id,
+        role: user.role
+    };
+    let token = generateToken(payload);
     // send response
+    res.json({
+        success: true,
+        message: "",
+        data: {
+            _id: user._id,
+            name: user.name,
+            age: user.age,
+            role: user.role,
+            email: user.email
+        },
+        token
+    })
 }
 const registerHandler = async (req, res) => {
     try {
