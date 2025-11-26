@@ -26,6 +26,10 @@ const loginHandler = async (req, res) => {
             message: "invalid credentials"
         })
     }
+
+    //jwt issue
+
+    // send response
 }
 const registerHandler = async (req, res) => {
     try {
