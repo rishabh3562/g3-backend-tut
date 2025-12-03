@@ -1,30 +1,23 @@
-import React, { useEffect } from "react";
-import Atul from "./Atul";
-const Parent = ({ name }) => {
-  return (
-    <>
-      <h1>this is parent , called by {name} </h1>
-      <Child name={name} />
-    </>
-  );
-};
-const Child = ({ name }) => {
-  return (
-    <>
-      <h1>this is Child , called by {name} </h1>
-    </>
-  );
-};
-// cosnt;
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 const App = () => {
+  const [data, setdata] = useState([]);
   useEffect(() => {
-    console.log("app mount");
+    const fetchData = async () => {
+      try {
+        let res = await axios.get("http://localhost:8000/users");
+        setdata(res.data);
+        console.log("data fetched", res);
+      } catch (error) {
+        console.log("some error occurred", error);
+      }
+    };
+    fetchData();
   }, []);
+
   return (
     <>
-      <Parent name={"atul"} />
-
-      <Atul />
+      <div>hi</div>
     </>
   );
 };

@@ -5,7 +5,8 @@ require('dotenv').config();
 const connectDB = require('./config/database')
 const userRouter = require('./routes/userRouter')
 const authRouter = require("./routes/authRouter")
-
+const cors = require('cors');
+app.use(cors());
 app.use(express.json())
 app.use("/", userRouter);
 app.use("/", authRouter);
